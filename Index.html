@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="DODT - Shoes first, outfit second">
+  <meta name="theme-color" content="#ff6b00">
+  <title>DODT | Shoes first, outfit second</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <!-- AOS for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #ff6b00;
+      /* Vibrant Orange from Logo */
+      --primary-dark: #c44000;
+      --primary-soft: #fff3e0;
+      --accent: #2d1b22;
+      /* Darker accent for contrast */
+      --bg-body: #ffffff;
+      --card-bg: #ffffff;
+      --card-border: #f0f0f0;
+      --text-main: #1a1a1a;
+      --text-muted: #666666;
+      --radius-lg: 24px;
+      --radius-md: 12px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Maintenance Mode Styles */
+    .maintenance-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #2d1b22 0%, #1a0f14 100%);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      text-align: center;
+      padding: 20px;
+      color: white;
+    }
+
+    .maintenance-screen i {
+      font-size: 5rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      animation: maintenance-pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes maintenance-pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+    }
+
+    .maintenance-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .maintenance-text {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 600px;
+      line-height: 1.8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Cairo', 'Inter', sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .loading-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, var(--primary) 0%, var(--primary-dark) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .spinner-ui {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin-anim 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    }
+
+    @keyframes spin-anim {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .header-box {
+      background: #ffffff;
+      padding: 6rem 0 7rem;
+      position: relative;
+      color: var(--text-main);
+      text-align: center;
+      border-bottom: 0;
+    }
+
+    .header-box::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 6rem;
+      background: var(--bg-body);
+      clip-path: ellipse(60% 100% at 50% 100%);
+    }
+
+    .logo-frame {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 1.5rem;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+      z-index: 10;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--primary-soft);
+    }
+
+    .logo-frame:hover {
+      transform: translateY(-5px);
+    }
+
+    .logo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .store-name {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--primary);
+      font-family: 'Playfair Display', serif;
+      letter-spacing: -1px;
+    }
+
+    .store-tag {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      letter-spacing: 1px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    .main-container {
+      margin-top: -3rem;
+      position: relative;
+      z-index: 20;
+      padding-bottom: 5rem;
+    }
+
+    .modern-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modern-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary), #000);
+      opacity: 0.8;
+    }
+
+    .modern-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-8px);
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .card-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--primary-soft);
+      margin-right: 10px;
+    }
+
+    .card-title i {
+      color: var(--accent);
+      background: var(--bg-body);
+      padding: 10px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+    }
+
+    .info-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: #fafafa;
+      border-radius: var(--radius-md);
+      margin-bottom: 1.25rem;
+      text-decoration: none !important;
+      color: inherit;
+      border: 1px solid #f0f0f0;
+      transition: var(--transition);
+      height: 100%;
+    }
+
+    .info-link:hover {
+      background: #ffffff;
+      border-color: var(--primary);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .icon-circle {
+      width: 60px;
+      height: 60px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--primary-soft);
+      transition: var(--transition);
+    }
+
+    .info-link:hover .icon-circle {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.1) rotate(10deg);
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+
+    .info-data {
+      font-size: 1.2rem;
+      color: var(--accent);
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .net-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .net-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 1.25rem;
+      border-radius: 50px;
+      color: white;
+      text-decoration: none !important;
+      font-weight: 700;
+      transition: var(--transition);
+      font-size: 1rem;
+      border: 2px solid transparent;
+    }
+
+    .net-item:hover {
+      background: white !important;
+      color: var(--primary);
+      border-color: var(--accent);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .net-item i {
+      font-size: 1.5rem;
+    }
+
+    .bg-wa {
+      background: #128c7e;
+    }
+
+    .bg-fb {
+      background: #1877f2;
+    }
+
+    .bg-ig {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    }
+
+    .bg-tg {
+      background: #229ed9;
+    }
+
+    .bg-tk {
+      background: #000000;
+    }
+
+    .hours-tag {
+      background: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      color: var(--primary);
+      font-weight: 700;
+      margin: 0 auto 3rem;
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--accent);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hours-tag i {
+      font-size: 1.4rem;
+      color: var(--accent);
+      animation: pulse-anim 2s infinite;
+    }
+
+    @keyframes pulse-anim {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .map-box {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      height: 350px;
+      border: 2px solid var(--primary-soft);
+      box-shadow: var(--shadow-md);
+    }
+
+    .qr-box {
+      margin-top: 2rem;
+    }
+
+    .qr-img-frame {
+      background: white;
+      padding: 12px;
+      border-radius: var(--radius-lg);
+      display: inline-block;
+      box-shadow: var(--shadow-lg);
+      border: 2px solid var(--accent);
+    }
+
+    .qr-img-frame img {
+      width: 180px;
+      height: 180px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--primary-soft);
+      background: white;
+    }
+
+    /* Floating Navigation */
+    .nav-buttons {
+      position: fixed;
+      left: 25px;
+      bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 1000;
+    }
+
+    .nav-btn {
+      width: 48px;
+      height: 48px;
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.25rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-md);
+    }
+
+    .hidden-admin-trigger {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      width: 40px;
+      height: 40px;
+      z-index: 9999;
+      opacity: 0.03;
+      text-decoration: none;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .hidden-admin-trigger:hover {
+      opacity: 0.8;
+      transform: scale(1.2);
+    }
+
+    .visitor-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(138, 43, 75, 0.08);
+      /* Transparent Rose */
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      color: var(--primary);
+      border: 1px solid var(--primary-soft);
+    }
+
+    /* Occasion Float */
+    .occasion-box {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 2000;
+      width: 140px;
+    }
+
+    .occasion-img {
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      border: 4px solid #fff;
+      display: block;
+      animation: float-anim 4s ease-in-out infinite;
+    }
+
+    @keyframes float-anim {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0);
+      }
+
+      50% {
+        transform: translateY(-15px) rotate(2deg);
+      }
+    }
+
+    .btn-outline-primary {
+      border-color: var(--accent);
+      color: var(--primary);
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .btn-outline-primary:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .store-name {
+        font-size: 2rem;
+      }
+
+      .modern-card {
+        padding: 1.5rem;
+      }
+
+      .net-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <div class="loading-screen" id="loadScreen">
+    <div class="spinner-ui"></div>
+    <p class="text-white mt-3 fw-bold" id="uiLoadName" style="letter-spacing: 2px;">DODT</p>
+  </div>
+
+
+  <div class="maintenance-screen" id="maintenanceScreen">
+    <i class="bi bi-tools"></i>
+    <h2 class="maintenance-title">عذراً، الموقع مغلق للتحديثات</h2>
+    <p class="maintenance-text">نحن نقوم ببعض التحسينات لنقدم لكم تجربة أفضل. سنعود قريباً جداً!</p>
+  </div>
+
+  <div id="wrapper" style="display: none;">
+    <div id="occasionContainer" class="occasion-box" style="display: none;">
+      <div class="occasion-close" onclick="closeOccasion()">×</div>
+      <img id="uiOccasionImg" src="" alt="Occasion" class="occasion-img">
+    </div>
+
+    <header class="header-box">
+      <div class="container" data-aos="fade-down">
+        <div class="logo-frame">
+          <img id="uiLogo" src="" alt="logo" style="display: none;">
+          <i id="uiLogoDef" class="bi bi-shop display-4 text-primary"></i>
+        </div>
+        <h1 class="store-name" id="uiName">DODT.</h1>
+
+        </h1>
+        <p class="store-tag" id="uiDesc">Shoes first, outfit second</p>
+        <div class="visitor-badge" id="visitorBadge" style="display: none;">
+          <i class="bi bi-eye"></i>
+          <span>عدد الزوار:</span>
+          <span id="uiVisitorCount">0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-container">
+      <div class="container px-3">
+
+        <div class="hours-tag" id="uiHours" style="display: none;" data-aos="zoom-in">
+          <i class="bi bi-clock-fill"></i>
+          <span id="uiHoursText">نعمل الآن</span>
+        </div>
+
+        <div class="row g-5">
+          <!-- Main Hero Card: Branding/Contact -->
+          <div class="col-12" data-aos="fade-up">
+            <div class="modern-card text-center">
+              <h2 class="card-title justify-content-center"><i class="bi bi-telephone"></i> تواصل معنا</h2>
+              <div class="row justify-content-center g-4 mt-2">
+                <div class="col-6 col-md-4" id="containerPhone" style="display: none;">
+                  <a href="#" class="info-link" id="linkPhone">
+                    <div class="icon-circle"><i class="bi bi-phone"></i></div>
+                    <div>
+                      <div class="info-label">الجوال</div>
+                      <div class="info-data" id="valPhone">...</div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-6 col-md-4" id="containerPhone2" style="display: none;">
+                  <a href="#" class="info-link" id="linkPhone2">
+                    <div class="icon-circle"><i class="bi bi-phone-vibrate"></i></div>
+                    <div>
+                      <div class="info-label">جوال إضافي</div>
+                      <div class="info-data" id="valPhone2">...</div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-12 col-md-4" id="containerAddr" style="display: none;">
+                  <div class="info-link" style="cursor: default;">
+                    <div class="icon-circle"><i class="bi bi-geo-alt"></i></div>
+                    <div>
+                      <div class="info-label">العنوان</div>
+                      <div class="info-data" id="valAddr" style="font-size: 1rem;">...</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Staggered Layout for Socials and Map -->
+          <div class="col-12 col-lg-5" data-aos="fade-left">
+            <div class="modern-card h-100">
+              <h2 class="card-title"><i class="bi bi-share"></i> انضم لعالمنا</h2>
+              <p class="text-muted small mb-4">تابعي أحدث صيحات الموضة والعروض الحصرية عبر منصاتنا</p>
+              <div class="net-grid" id="uiNets"></div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-7" id="uiMapSec" style="display: none;" data-aos="fade-right">
+            <div class="modern-card h-100">
+              <h2 class="card-title"><i class="bi bi-map"></i> الموقع</h2>
+              <div class="map-box mb-4"><iframe id="uiMapFrame" src="" loading="lazy"></iframe></div>
+              <div class="text-center">
+                <a id="btnMapDirect" href="#" target="_blank" class="btn btn-outline-primary rounded-pill px-5 py-2">
+                  <i class="bi bi-geo-alt-fill me-2"></i> خرائط جوجل
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- WhatsApp Marketing Section -->
+        <div class="col-12" data-aos="fade-up">
+          <div class="modern-card text-center"
+            style="background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); color: white; border: none;">
+            <h2 class="card-title justify-content-center text-white"
+              style="border-bottom-color: rgba(255,255,255,0.2);"><i class="bi bi-whatsapp"></i> انضم لمجتمعنا</h2>
+            <p class="mb-4">كن أول من يعلم بأحدث الموديلات والعروض الحصرية مباشرة على واتساب</p>
+
+            <form id="waForm" onsubmit="submitWhatsApp(event)" class="row g-3 justify-content-center">
+              <div class="col-12 col-md-5">
+                <input type="text" id="waName" class="form-control rounded-pill border-0 px-4 py-3"
+                  placeholder="اسمك الكريم" required>
+              </div>
+              <div class="col-12 col-md-5">
+                <input type="tel" id="waPhone" class="form-control rounded-pill border-0 px-4 py-3"
+                  placeholder="رقم الواتساب" required>
+              </div>
+              <div class="col-12 col-md-4 mt-4">
+                <button type="submit" id="waBtn"
+                  class="btn btn-light rounded-pill w-100 py-3 fw-bold text-success shadow-lg">
+                  <i class="bi bi-send-fill me-2"></i> اشترك الآن
+                </button>
+              </div>
+            </form>
+            <div id="waMsg" class="mt-3 small fw-bold"></div>
+          </div>
+        </div>
+
+        <!-- QR Section -->
+        <div class="col-12 text-center" data-aos="zoom-in">
+          <div class="qr-box mt-5">
+            <div class="qr-img-frame">
+              <img id="uiQr" src="" alt="QR" style="display: none;">
+              <i id="uiQrDef" class="bi bi-qr-code text-muted" style="font-size: 5rem;"></i>
+            </div>
+            <p class="mt-4 small fw-bold" style="color: var(--primary);">
+              <i class="bi bi-stars"></i> SCAN QR CODE
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-buttons">
+    <div class="nav-btn" onclick="scrollToPos('top')" title="Top">
+      <i class="bi bi-chevron-up"></i>
+    </div>
+    <div class="nav-btn" onclick="scrollToPos('bottom')" title="Bottom">
+      <i class="bi bi-chevron-down"></i>
+    </div>
+  </div>
+
+  <footer>
+    <p id="uiFooterText">© 2024 DODT - Shoes first, outfit second</p>
+  </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    (function () {
+      /**
+       * Global Error Handler
+       */
+      window.onerror = function (message, source, lineno, colno, error) {
+        console.error('LokaStore Global Error:', { message, source, lineno, colno, error });
+        return false;
+      };
+
+      /**
+       * Initializer
+       */
+      function initApp() {
+        console.log("Initializing Loka Store...");
+
+        // Initialize Animations
+        if (window.AOS) {
+          AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-out-cubic'
+          });
+        }
+
+        if (window.google && google.script && google.script.run) {
+          google.script.run
+            .withSuccessHandler(onDataReceived)
+            .withFailureHandler(onDataError)
+            .getStoreData();
+        } else {
+          console.warn("Google Apps Script environment not detected.");
+          fallbackLoading();
+        }
+      }
+
+      /**
+       * Handle data received from backend
+       */
+      function onDataReceived(res) {
+        try {
+          if (!res || !res.success) {
+            throw new Error(res ? res.message : 'Unknown backend error');
+          }
+          renderApp(res.data);
+        } catch (e) {
+          onDataError(e);
+        }
+      }
+
+      /**
+       * Handle backend communication errors
+       */
+      function onDataError(err) {
+        console.error("Data Fetch Error:", err);
+        // Show an error state to the user instead of just hanging
+        document.getElementById('loadScreen').innerHTML = `
+          <div class="text-center p-4">
+            <i class="bi bi-exclamation-triangle display-1 text-warning"></i>
+            <h3 class="mt-3 text-white">عذراً، حدث خطأ في تحميل البيانات</h3>
+            <p class="text-white-50">${err.message || 'يرجى المحاولة مرة أخرى لاحقاً'}</p>
+            <button class="btn btn-outline-light mt-3" onclick="location.reload()">إعادة تحميل</button>
+          </div>
+        `;
+      }
+
+      /**
+       * Render the UI with retrieved data
+       */
+      function renderApp(d) {
+        if (!d) return;
+        console.log("App Data received:", d);
+
+        // Check for Maintenance Mode
+        if (d.isClosed) {
+          showMaintenance();
+          return;
+        }
+
+        // Basic Info
+        setSafeText('uiName', d.storeName, "DODT.");
+        setSafeText('uiLoadName', d.storeName, "DODT");
+        setSafeText('uiDesc', d.storeDescription, 'Shoes first, outfit second');
+
+        // Contacts with Conditional Visibility
+        processContactItem('containerPhone', 'valPhone', 'linkPhone', d.phone, 'tel:');
+        processContactItem('containerPhone2', 'valPhone2', 'linkPhone2', d.phone2, 'tel:');
+        processContactItem('containerAddr', 'valAddr', null, d.address);
+
+        // Footer
+        setSafeText('uiFooterText', d.footerText, '© ' + new Date().getFullYear() + " DODT - Shoes first, outfit second");
+
+        // Working Hours
+        if (d.workingHours) {
+          const hoursEl = document.getElementById('uiHours');
+          const hoursTxt = document.getElementById('uiHoursText');
+          if (hoursEl && hoursTxt) {
+            hoursEl.style.display = 'flex';
+            hoursTxt.innerText = d.workingHours;
+          }
+        }
+
+        // Visitor Count
+        if (d.visitorCount) {
+          const badge = document.getElementById('visitorBadge');
+          const count = document.getElementById('uiVisitorCount');
+          if (badge && count) {
+            badge.style.display = 'inline-flex';
+            count.innerText = d.visitorCount;
+          }
+        }
+
+        // Logo
+        processLogo(d.logoUrl);
+
+        // Social Networks
+        renderSocialGrid(d);
+
+        // Map
+        processMap(d.mapUrl);
+
+        // Occasion
+        if (d.occasion && d.occasion.length > 5) {
+          const container = document.getElementById('occasionContainer');
+          const img = document.getElementById('uiOccasionImg');
+          if (container && img) {
+            container.style.display = 'block';
+            img.src = d.occasion;
+          }
+        }
+
+        // QR Code
+        renderQRCode(d.qrCodeUrl);
+
+        // Show App
+        hideLoading();
+      }
+
+      /**
+       * Helper to safely set text content
+       */
+      function setSafeText(id, val, fallback) {
+        const el = document.getElementById(id);
+        if (el) el.innerText = val || fallback;
+      }
+
+      /**
+       * Handle contact items visibility
+       */
+      function processContactItem(containerId, valId, linkId, value, linkPrefix) {
+        const container = document.getElementById(containerId);
+        const valEl = document.getElementById(valId);
+        const linkEl = linkId ? document.getElementById(linkId) : null;
+
+        if (!container || !valEl) return;
+
+        if (value && String(value).trim().length > 0) {
+          container.style.display = 'block';
+          valEl.innerText = value;
+          if (linkEl && linkPrefix) {
+            linkEl.href = linkPrefix + String(value).replace(/\s/g, '');
+          }
+        } else {
+          container.style.display = 'none';
+        }
+      }
+
+      /**
+       * Map processing logic
+       */
+      function processMap(url) {
+        if (!url) return;
+        const mapSec = document.getElementById('uiMapSec');
+        const mapFrame = document.getElementById('uiMapFrame');
+        const mapBtn = document.getElementById('btnMapDirect');
+        if (!mapSec || !mapFrame || !mapBtn) return;
+
+        mapSec.style.display = 'block';
+        mapBtn.href = url;
+
+        // Try to detect if it's an embed URL
+        if (url.indexOf('/maps/embed') > -1) {
+          mapFrame.src = url;
+          mapFrame.parentElement.style.display = 'block';
+        } else {
+          // If not an embed URL, hide the frame and point the button to the link
+          mapFrame.parentElement.style.display = 'none';
+          console.warn("Map URL is not an embeddable link. Direct button provided.");
+        }
+      }
+
+      /**
+       * Logo processing logic
+       */
+      function processLogo(url) {
+        const img = document.getElementById('uiLogo');
+        const def = document.getElementById('uiLogoDef');
+        if (!img || !def) return;
+
+        if (url && url.length > 5) {
+          let processedUrl = url;
+          if (url.indexOf('drive.google.com') > -1) {
+            const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+            if (m) processedUrl = 'https://drive.google.com/uc?export=view&id=' + m[1];
+          }
+          img.src = processedUrl;
+          img.style.display = 'block';
+          def.style.display = 'none';
+          img.onerror = function () {
+            img.style.display = 'none';
+            def.style.display = 'block';
+          };
+        }
+      }
+
+      /**
+       * Render social icons grid
+       */
+      function renderSocialGrid(d) {
+        const grid = document.getElementById('uiNets');
+        if (!grid) return;
+        grid.innerHTML = ''; // Clear for cleanliness
+
+        const nets = [
+          { k: 'whatsapp', i: 'bi-whatsapp', c: 'bg-wa', l: 'واتساب', u: 'https://wa.me/' },
+          { k: 'facebookUrl', i: 'bi-facebook', c: 'bg-fb', l: 'فيسبوك' },
+          { k: 'instagramUrl', i: 'bi-instagram', c: 'bg-ig', l: 'انستا' },
+          { k: 'telegramUrl', i: 'bi-telegram', c: 'bg-tg', l: 'تليجرام' },
+          { k: 'tiktokUrl', i: 'bi-tiktok', c: 'bg-tk', l: 'تيك توك' }
+        ];
+
+        nets.forEach(n => {
+          let u = d[n.k];
+          if (!u) return;
+
+          if (n.k === 'whatsapp') {
+            // Clean number: keep only digits
+            let cleanNum = String(u).replace(/[^0-9]/g, '');
+            // Handle common Egyptian local format: starts with 01 and has 11 digits
+            if (cleanNum.startsWith('01') && cleanNum.length === 11) {
+              cleanNum = '20' + cleanNum.substring(1);
+            }
+            // If it doesn't have a country code and doesn't start with 20, but is 11 digits starting with 1
+            else if (cleanNum.startsWith('1') && cleanNum.length === 10) {
+              cleanNum = '20' + cleanNum;
+            }
+            u = n.u + cleanNum;
+          }
+
+          const a = document.createElement('a');
+          a.href = u;
+          a.target = '_blank';
+          a.className = 'net-item ' + n.c;
+          a.rel = 'noopener noreferrer';
+          a.innerHTML = `<i class="bi ${n.i}"></i><span>${n.l}</span>`;
+          grid.appendChild(a);
+        });
+      }
+
+      /**
+       * Render QR Code
+       */
+      function renderQRCode(dataUrl) {
+        const qrImg = document.getElementById('uiQr');
+        const qrDef = document.getElementById('uiQrDef');
+        if (!qrImg || !qrDef) return;
+
+        const qrOutput = dataUrl || window.location.href;
+        qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=' + encodeURIComponent(qrOutput);
+        qrImg.onload = function () {
+          qrImg.style.display = 'block';
+          qrDef.style.display = 'none';
+        };
+      }
+
+      /**
+       * UI Transition Helpers
+       */
+      function hideLoading() {
+        const screen = document.getElementById('loadScreen');
+        const wrapper = document.getElementById('wrapper');
+        const maintenance = document.getElementById('maintenanceScreen');
+        if (screen) screen.style.display = 'none';
+        if (maintenance) maintenance.style.display = 'none';
+        if (wrapper) wrapper.style.display = 'block';
+      }
+
+      function showMaintenance() {
+        const screen = document.getElementById('loadScreen');
+        const maintenance = document.getElementById('maintenanceScreen');
+        const wrapper = document.getElementById('wrapper');
+        if (screen) screen.style.display = 'none';
+        if (wrapper) wrapper.style.display = 'none';
+        if (maintenance) maintenance.style.display = 'flex';
+      }
+
+      function fallbackLoading() {
+        // Just show the wrapper with placeholders if not in GAS
+        hideLoading();
+      }
+
+      /**
+       * Public navigation and interaction functions
+       */
+      window.scrollToPos = function (pos) {
+        const options = { behavior: 'smooth' };
+        if (pos === 'top') {
+          window.scrollTo(Object.assign(options, { top: 0 }));
+        } else {
+          window.scrollTo(Object.assign(options, { top: document.body.scrollHeight }));
+        }
+      };
+
+      window.closeOccasion = function () {
+        const el = document.getElementById('occasionContainer');
+        if (el) el.style.display = 'none';
+      };
+
+      /**
+       * WhatsApp Registration
+       */
+      window.submitWhatsApp = function (e) {
+        e.preventDefault();
+        const btn = document.getElementById('waBtn');
+        const msg = document.getElementById('waMsg');
+        const name = document.getElementById('waName').value.trim();
+        const phone = document.getElementById('waPhone').value.replace(/[^0-9]/g, '');
+
+        if (!name) {
+          msg.innerText = "يرجى إدخال الاسم";
+          msg.className = "mt-3 small fw-bold text-warning";
+          return;
+        }
+
+        if (phone.length !== 11) {
+          msg.innerText = "عذراً، يجب أن يكون رقم الهاتف 11 رقماً بالضبط";
+          msg.className = "mt-3 small fw-bold text-warning";
+          return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> جاري الاشتراك...';
+        msg.innerText = "";
+
+        if (window.google && google.script && google.script.run) {
+          google.script.run
+            .withSuccessHandler(function (res) {
+              btn.disabled = false;
+              btn.innerHTML = res.success ? '<i class="bi bi-check-all me-2"></i> تم الاشتراك' : '<i class="bi bi-send-fill me-2"></i> اشترك الآن';
+              msg.innerText = res.message;
+              msg.className = res.success ? "mt-3 small fw-bold text-white" : "mt-3 small fw-bold text-warning";
+
+              if (res.success) {
+                document.getElementById('waForm').reset();
+                setTimeout(() => {
+                  btn.innerHTML = '<i class="bi bi-send-fill me-2"></i> اشترك الآن';
+                }, 3000);
+              }
+            })
+            .withFailureHandler(function (err) {
+              btn.disabled = false;
+              btn.innerHTML = '<i class="bi bi-send-fill me-2"></i> اشترك الآن';
+              msg.innerText = "عذراً، حدث خطأ أثناء الاتصال. حاول مرة أخرى.";
+              msg.className = "mt-3 small fw-bold text-danger";
+            })
+            .registerWhatsAppCustomer({ name, phone });
+        } else {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="bi bi-send-fill me-2"></i> اشترك الآن';
+          msg.innerText = "بيئة العمل لا تدعم التسجيل حالياً";
+          msg.className = "mt-3 small fw-bold text-white";
+        }
+      };
+
+      // Start the App
+      window.addEventListener('load', initApp);
+    })();
+  </script> <a href="?p=admin" target="_top" class="hidden-admin-trigger" title="Admin">
+    <i class="bi bi-gear-fill"></i>
+  </a>
+</body>
+
+</html>
